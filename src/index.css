@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --slide-bg: 23 19 17;
+  --slide-surface: 34 29 26;
+  --slide-border: 74 65 56;
+  --slide-text: 246 240 232;
+  --slide-muted: 181 171 160;
+  --slide-subtle: 127 117 107;
+  --slide-accent: 231 224 214;
+  --slide-green: 142 160 125;
+  --slide-amber: 184 145 94;
+  --slide-red: 173 110 95;
+  --slide-purple: 148 128 148;
+  --slide-teal: 120 149 143;
+  --slide-stone: 108 99 91;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -12,9 +28,11 @@ html, body, #root {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: #0f172a;
-  color: #f8fafc;
+  font-family: 'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif;
+  background:
+    radial-gradient(circle at top, rgb(48 40 35) 0%, rgb(29 24 21) 24%, rgb(var(--slide-bg)) 62%),
+    rgb(var(--slide-bg));
+  color: rgb(var(--slide-text));
 }
 
 code, .mono {
@@ -25,9 +43,165 @@ code, .mono {
   height: 4px;
 }
 .slide-table::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: rgb(var(--slide-surface));
 }
 .slide-table::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: rgb(var(--slide-border));
   border-radius: 2px;
+}
+
+::selection {
+  background: rgb(var(--slide-accent) / 0.22);
+}
+
+svg [fill="#0f172a"] {
+  fill: rgb(var(--slide-bg)) !important;
+}
+
+svg [fill="#1e293b"] {
+  fill: rgb(var(--slide-surface)) !important;
+}
+
+svg [fill="#334155"] {
+  fill: rgb(var(--slide-border)) !important;
+}
+
+svg [stroke="#334155"] {
+  stroke: rgb(var(--slide-border)) !important;
+}
+
+svg [fill="#475569"] {
+  fill: rgb(var(--slide-subtle)) !important;
+}
+
+svg [fill="#64748b"] {
+  fill: rgb(var(--slide-stone)) !important;
+}
+
+svg [stroke="#64748b"] {
+  stroke: rgb(var(--slide-stone)) !important;
+}
+
+svg [fill="#94a3b8"] {
+  fill: rgb(var(--slide-muted)) !important;
+}
+
+svg [stroke="#94a3b8"] {
+  stroke: rgb(var(--slide-muted)) !important;
+}
+
+svg [fill="#f8fafc"] {
+  fill: rgb(var(--slide-text)) !important;
+}
+
+svg [stroke="#f8fafc"] {
+  stroke: rgb(var(--slide-text)) !important;
+}
+
+svg [fill="#3b82f6"] {
+  fill: rgb(var(--slide-accent)) !important;
+}
+
+svg [stroke="#3b82f6"] {
+  stroke: rgb(var(--slide-accent)) !important;
+}
+
+svg [fill="#10b981"] {
+  fill: rgb(var(--slide-green)) !important;
+}
+
+svg [stroke="#10b981"] {
+  stroke: rgb(var(--slide-green)) !important;
+}
+
+svg [fill="#f59e0b"] {
+  fill: rgb(var(--slide-amber)) !important;
+}
+
+svg [stroke="#f59e0b"] {
+  stroke: rgb(var(--slide-amber)) !important;
+}
+
+svg [fill="#ef4444"] {
+  fill: rgb(var(--slide-red)) !important;
+}
+
+svg [stroke="#ef4444"] {
+  stroke: rgb(var(--slide-red)) !important;
+}
+
+svg [fill="#a855f7"],
+svg [fill="#8b5cf6"] {
+  fill: rgb(var(--slide-purple)) !important;
+}
+
+svg [stroke="#a855f7"],
+svg [stroke="#8b5cf6"] {
+  stroke: rgb(var(--slide-purple)) !important;
+}
+
+svg [fill="#06b6d4"] {
+  fill: rgb(var(--slide-teal)) !important;
+}
+
+svg [stroke="#06b6d4"] {
+  stroke: rgb(var(--slide-teal)) !important;
+}
+
+svg [fill^="rgba(15,23,42"] {
+  fill: rgb(var(--slide-bg) / 0.18) !important;
+}
+
+svg [stroke^="rgba(15,23,42"] {
+  stroke: rgb(var(--slide-bg) / 0.18) !important;
+}
+
+svg [fill^="rgba(59,130,246"] {
+  fill: rgb(var(--slide-accent) / 0.12) !important;
+}
+
+svg [stroke^="rgba(59,130,246"] {
+  stroke: rgb(var(--slide-accent) / 0.4) !important;
+}
+
+svg [fill^="rgba(16,185,129"] {
+  fill: rgb(var(--slide-green) / 0.14) !important;
+}
+
+svg [stroke^="rgba(16,185,129"] {
+  stroke: rgb(var(--slide-green) / 0.42) !important;
+}
+
+svg [fill^="rgba(245,158,11"] {
+  fill: rgb(var(--slide-amber) / 0.14) !important;
+}
+
+svg [stroke^="rgba(245,158,11"] {
+  stroke: rgb(var(--slide-amber) / 0.42) !important;
+}
+
+svg [fill^="rgba(239,68,68"] {
+  fill: rgb(var(--slide-red) / 0.14) !important;
+}
+
+svg [stroke^="rgba(239,68,68"] {
+  stroke: rgb(var(--slide-red) / 0.42) !important;
+}
+
+svg [fill^="rgba(168,85,247"],
+svg [fill^="rgba(139,92,246"] {
+  fill: rgb(var(--slide-purple) / 0.14) !important;
+}
+
+svg [stroke^="rgba(168,85,247"],
+svg [stroke^="rgba(139,92,246"] {
+  stroke: rgb(var(--slide-purple) / 0.42) !important;
+}
+
+svg [fill^="rgba(6,182,212"] {
+  fill: rgb(var(--slide-teal) / 0.14) !important;
+}
+
+svg [stroke^="rgba(6,182,212"] {
+  stroke: rgb(var(--slide-teal) / 0.42) !important;
 }

@@ -13,13 +13,13 @@ export default function SlideLayout({ title, subtitle, section, children, noPadd
     <div className="w-full h-full flex flex-col">
       {/* Header */}
       {title && (
-        <div className="px-10 pt-6 pb-2 shrink-0">
+        <div className="px-10 pt-7 pb-2 shrink-0">
           {subtitle && (
-            <div className={`text-xs font-semibold uppercase tracking-widest mb-1 ${sectionColor}`}>
+            <div className={`text-[10px] font-semibold uppercase tracking-[0.28em] mb-1.5 ${sectionColor}`}>
               {subtitle}
             </div>
           )}
-          <h1 className="text-2xl font-bold text-slide-text leading-tight">{title}</h1>
+          <h1 className="text-[1.95rem] font-semibold tracking-tight text-slide-text leading-tight">{title}</h1>
         </div>
       )}
       {/* Content */}

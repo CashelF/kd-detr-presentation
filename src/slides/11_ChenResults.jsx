@@ -3,12 +3,12 @@ import Table from '../components/Table';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ReferenceLine } from 'recharts';
 
 const data = [
-  { name: 'Student\n(baseline)', mAP: 70.1, color: '#10b981' },
-  { name: '+ Cls KD', mAP: 71.8, color: '#f59e0b' },
-  { name: '+ Feat KD', mAP: 72.4, color: '#a855f7' },
-  { name: '+ Reg KD', mAP: 72.0, color: '#06b6d4' },
-  { name: 'Full KD', mAP: 73.2, color: '#3b82f6' },
-  { name: 'Teacher', mAP: 75.6, color: '#64748b' },
+  { name: 'Student\n(baseline)', mAP: 70.1, color: '#8ea07d' },
+  { name: '+ Cls KD', mAP: 71.8, color: '#b8915e' },
+  { name: '+ Feat KD', mAP: 72.4, color: '#948094' },
+  { name: '+ Reg KD', mAP: 72.0, color: '#78958f' },
+  { name: 'Full KD', mAP: 73.2, color: '#e7e0d6' },
+  { name: 'Teacher', mAP: 75.6, color: '#6c635b' },
 ];
 
 export default function ChenResultsSlide() {
@@ -49,15 +49,15 @@ export default function ChenResultsSlide() {
           <div className="flex-1 min-h-0">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data} margin={{ top: 10, right: 10, left: -10, bottom: 40 }} barSize={36}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} angle={-25} textAnchor="end" interval={0} height={50} />
-                <YAxis domain={[68, 76]} tick={{ fill: '#94a3b8', fontSize: 10 }}
-                  label={{ value: 'mAP (%)', angle: -90, position: 'insideLeft', fill: '#94a3b8', fontSize: 10, offset: 15 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#4a4138" />
+                <XAxis dataKey="name" tick={{ fill: '#b5aba0', fontSize: 9 }} angle={-25} textAnchor="end" interval={0} height={50} />
+                <YAxis domain={[68, 76]} tick={{ fill: '#b5aba0', fontSize: 10 }}
+                  label={{ value: 'mAP (%)', angle: -90, position: 'insideLeft', fill: '#b5aba0', fontSize: 10, offset: 15 }} />
                 <Tooltip
-                  contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 8, fontSize: 11 }}
-                  labelStyle={{ color: '#f8fafc' }}
+                  contentStyle={{ background: '#221d1a', border: '1px solid #4a4138', borderRadius: 8, fontSize: 11 }}
+                  labelStyle={{ color: '#f6f0e8' }}
                 />
-                <ReferenceLine y={75.6} stroke="#64748b" strokeDasharray="4 4" label={{ value: 'Teacher', fill: '#64748b', fontSize: 10 }} />
+                <ReferenceLine y={75.6} stroke="#6c635b" strokeDasharray="4 4" label={{ value: 'Teacher', fill: '#6c635b', fontSize: 10 }} />
                 <Bar dataKey="mAP" radius={[4, 4, 0, 0]}>
                   {data.map((d, i) => (
                     <Cell key={i} fill={d.color} opacity={0.85} />

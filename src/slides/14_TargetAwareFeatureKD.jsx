@@ -56,14 +56,15 @@ export default function TargetAwareFeatureKDSlide() {
             }))}
 
             {/* Down arrows between rows */}
-            <line x1={270} y1={150} x2={270} y2={213} stroke="#a855f7" strokeWidth={2} strokeDasharray="6 3" />
-            <polygon points="265,211 270,221 275,211" fill="#a855f7" />
+            <line x1={270} y1={150} x2={270} y2={190} stroke="#a855f7" strokeWidth={2} strokeDasharray="6 3" />
+            <polygon points="266,206 270,214 274,206" fill="#a855f7" />
             <text x={288} y={183} fill="#a855f7" fontSize={9} fontStyle="italic" fontFamily="Inter">Same mask</text>
 
-            <line x1={453} y1={150} x2={453} y2={168} stroke="#ef4444" strokeWidth={2.5} strokeDasharray="6 3" />
-            <line x1={453} y1={192} x2={453} y2={213} stroke="#ef4444" strokeWidth={2.5} strokeDasharray="6 3" />
-            <rect x={410} y={168} width={86} height={24} rx={6} fill="rgba(239,68,68,0.15)" stroke="#ef4444" strokeWidth={1.5} />
-            <text x={453} y={184} textAnchor="middle" fill="#ef4444" fontSize={10} fontWeight="600" fontFamily="Inter">MSE Loss</text>
+            <line x1={453} y1={150} x2={453} y2={160} stroke="#ef4444" strokeWidth={2.5} strokeDasharray="6 3" />
+            <line x1={453} y1={184} x2={453} y2={204} stroke="#ef4444" strokeWidth={2.5} strokeDasharray="6 3" />
+            <polygon points="449,206 453,214 457,206" fill="#ef4444" />
+            <rect x={410} y={160} width={86} height={24} rx={6} fill="rgba(239,68,68,0.15)" stroke="#ef4444" strokeWidth={1.5} />
+            <text x={453} y={176} textAnchor="middle" fill="#ef4444" fontSize={10} fontWeight="600" fontFamily="Inter">MSE Loss</text>
 
             {/* ROW 2: STUDENT */}
             <text x={87} y={207} textAnchor="middle" fill="#10b981" fontSize={11} fontWeight="600" fontFamily="Inter">Student Encoder Features</text>
@@ -79,7 +80,8 @@ export default function TargetAwareFeatureKDSlide() {
 
             <text x={178} y={279} textAnchor="middle" fill="#64748b" fontSize={20} fontWeight="700" fontFamily="Inter">×</text>
 
-            <text x={270} y={207} textAnchor="middle" fill="#a855f7" fontSize={11} fontWeight="600" fontFamily="Inter">Attention Map (reused)</text>
+            <rect x={208} y={191} width={124} height={14} rx={7} fill="#0f172a" />
+            <text x={270} y={198} dominantBaseline="middle" textAnchor="middle" fill="#a855f7" fontSize={9.5} fontWeight="600" fontFamily="Inter">Attention Map (reused)</text>
             <rect x={193} y={215} width={155} height={120} rx={8} fill="#1e293b" stroke="#a855f7" strokeWidth={1.5} strokeDasharray="5 3" />
             {[0,1,2,3,4].map(r => [0,1,2,3,4,5].map(c => (
               <rect key={`sa-${r}-${c}`} x={201 + c * 24} y={223 + r * 21} width={20} height={17} rx={2}
@@ -88,7 +90,8 @@ export default function TargetAwareFeatureKDSlide() {
 
             <Arrow x1={352} y1={275} x2={373} y2={275} color="amber" />
 
-            <text x={453} y={207} textAnchor="middle" fill="#06b6d4" fontSize={11} fontWeight="600" fontFamily="Inter">Weighted Student</text>
+            <rect x={402} y={191} width={102} height={14} rx={7} fill="#0f172a" />
+            <text x={453} y={198} dominantBaseline="middle" textAnchor="middle" fill="#06b6d4" fontSize={9.5} fontWeight="600" fontFamily="Inter">Weighted Student</text>
             <rect x={376} y={215} width={155} height={120} rx={8} fill="#1e293b" stroke="#06b6d4" strokeWidth={1.5} />
             {[0,1,2,3,4].map(r => [0,1,2,3,4,5].map(c => {
               const isObj = objectCells(r, c);
@@ -111,7 +114,7 @@ export default function TargetAwareFeatureKDSlide() {
           <div className="bg-slide-surface rounded-lg p-4 border border-slide-purple/30">
             <div className="text-xs font-semibold text-slide-purple mb-2">Attention as Guide</div>
             <div className="text-xs text-slide-muted leading-relaxed">
-              Use teacher's decoder cross-attention maps to identify which spatial locations are important for detection.
+              Use teacher&apos;s decoder cross-attention maps to identify which spatial locations are important for detection.
             </div>
           </div>
 

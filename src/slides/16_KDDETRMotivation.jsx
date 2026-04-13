@@ -24,13 +24,21 @@ export default function KDDETRMotivationSlide() {
       <div className="h-full pt-1">
         <svg viewBox="0 0 980 500" className="w-full h-full">
           <ArrowDefs />
+          <defs>
+            <marker id="ah-mismatch-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#ef4444" />
+            </marker>
+            <marker id="ah-step-amber" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#f59e0b" />
+            </marker>
+          </defs>
 
           <rect x={82} y={14} width={816} height={48} rx={14} fill="rgba(239,68,68,0.09)" stroke="#ef4444" strokeWidth={2} />
           <text x={490} y={43} textAnchor="middle" fill="#ef4444" fontSize={18} fontWeight="700" fontFamily="Inter, sans-serif">
             Problem: teacher and student query slots do not keep the same semantics
           </text>
 
-          <rect x={40} y={95} width={410} height={250} rx={18} fill="rgba(239,68,68,0.03)" stroke="rgba(239,68,68,0.55)" strokeWidth={1.5} />
+          <rect x={40} y={95} width={410} height={268} rx={18} fill="rgba(239,68,68,0.03)" stroke="rgba(239,68,68,0.55)" strokeWidth={1.5} />
           <rect x={60} y={112} width={180} height={28} rx={14} fill="rgba(239,68,68,0.12)" stroke="#ef4444" strokeWidth={1} />
           <text x={150} y={130} textAnchor="middle" fill="#ef4444" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
             Naive index matching
@@ -58,10 +66,29 @@ export default function KDDETRMotivationSlide() {
                   fontSize={11}
                   rx={8}
                 />
-                <line x1={224} y1={cy} x2={264} y2={cy} stroke="#ef4444" strokeWidth={2} strokeDasharray="6 5" />
+                <line
+                  x1={224}
+                  y1={cy}
+                  x2={232}
+                  y2={cy}
+                  stroke="#ef4444"
+                  strokeWidth={2}
+                  strokeDasharray="5 4"
+                  markerEnd="url(#ah-mismatch-red)"
+                />
                 <circle cx={247} cy={cy} r={13} fill="#0f172a" stroke="#ef4444" strokeWidth={2} />
                 <line x1={241} y1={cy - 6} x2={253} y2={cy + 6} stroke="#ef4444" strokeWidth={2.5} strokeLinecap="round" />
                 <line x1={253} y1={cy - 6} x2={241} y2={cy + 6} stroke="#ef4444" strokeWidth={2.5} strokeLinecap="round" />
+                <line
+                  x1={270}
+                  y1={cy}
+                  x2={262}
+                  y2={cy}
+                  stroke="#ef4444"
+                  strokeWidth={2}
+                  strokeDasharray="5 4"
+                  markerEnd="url(#ah-mismatch-red)"
+                />
                 <Box
                   x={272}
                   y={y}
@@ -79,12 +106,12 @@ export default function KDDETRMotivationSlide() {
             );
           })}
 
-          <rect x={72} y={320} width={350} height={26} rx={13} fill="rgba(239,68,68,0.10)" />
-          <text x={247} y={337} textAnchor="middle" fill="#f87171" fontSize={11} fontWeight="600" fontFamily="Inter, sans-serif">
+          <rect x={72} y={324} width={350} height={34} rx={17} fill="rgba(239,68,68,0.10)" />
+          <text x={247} y={341} textAnchor="middle" dominantBaseline="middle" fill="#f87171" fontSize={11} fontWeight="600" fontFamily="Inter, sans-serif">
             Query slots drift, so feature distillation sends the wrong signal
           </text>
 
-          <rect x={500} y={95} width={440} height={250} rx={18} fill="rgba(16,185,129,0.03)" stroke="rgba(16,185,129,0.55)" strokeWidth={1.5} />
+          <rect x={500} y={95} width={440} height={268} rx={18} fill="rgba(16,185,129,0.03)" stroke="rgba(16,185,129,0.55)" strokeWidth={1.5} />
           <rect x={520} y={112} width={188} height={28} rx={14} fill="rgba(16,185,129,0.12)" stroke="#10b981" strokeWidth={1} />
           <text x={614} y={130} textAnchor="middle" fill="#10b981" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
             Output matching helps
@@ -131,44 +158,63 @@ export default function KDDETRMotivationSlide() {
             );
           })}
 
-          <text x={720} y={296} textAnchor="middle" fill="#34d399" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
+          <text x={720} y={292} textAnchor="middle" fill="#34d399" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
             Predictions can be paired correctly
           </text>
-          <rect x={606} y={306} width={228} height={38} rx={14} fill="rgba(245,158,11,0.10)" stroke="#f59e0b" strokeWidth={1} />
-          <text x={720} y={322} textAnchor="middle" fill="#fbbf24" fontSize={10.5} fontWeight="600" fontFamily="Inter, sans-serif">
+          <rect x={598} y={304} width={244} height={52} rx={18} fill="rgba(245,158,11,0.10)" stroke="#f59e0b" strokeWidth={1} />
+          <text x={720} y={322} textAnchor="middle" dominantBaseline="middle" fill="#fbbf24" fontSize={10.5} fontWeight="600" fontFamily="Inter, sans-serif">
             Intermediate features still come from
           </text>
-          <text x={720} y={335} textAnchor="middle" fill="#fbbf24" fontSize={10.5} fontWeight="600" fontFamily="Inter, sans-serif">
+          <text x={720} y={338} textAnchor="middle" dominantBaseline="middle" fill="#fbbf24" fontSize={10.5} fontWeight="600" fontFamily="Inter, sans-serif">
             different query paths
           </text>
 
-          <rect x={110} y={376} width={760} height={106} rx={20} fill="rgba(245,158,11,0.10)" stroke="#f59e0b" strokeWidth={2.5} />
+          <rect x={110} y={376} width={760} height={108} rx={20} fill="rgba(245,158,11,0.10)" stroke="#f59e0b" strokeWidth={2.5} />
           <text x={490} y={407} textAnchor="middle" fill="#f59e0b" fontSize={20} fontWeight="700" fontFamily="Inter, sans-serif">
             KD-DETR: create consistent distillation points first
           </text>
-          <text x={490} y={428} textAnchor="middle" fill="#cbd5e1" fontSize={12} fontFamily="Inter, sans-serif">
+          <text x={490} y={425} textAnchor="middle" fill="#cbd5e1" fontSize={12} fontFamily="Inter, sans-serif">
             The fix is to compare features only after teacher and student are anchored to the same semantic reference points.
           </text>
 
           {solutionSteps.map((step) => (
-            <Box
-              key={step.label}
-              x={step.x}
-              y={440}
-              w={200}
-              h={32}
-              label={step.label}
-              sublabel={step.sublabel}
-              color="rgba(245,158,11,0.14)"
-              border="#f59e0b"
-              textColor="#fbbf24"
-              fontSize={10}
-              rx={10}
-            />
+            <g key={step.label}>
+              <rect
+                x={step.x}
+                y={438}
+                width={200}
+                height={38}
+                rx={12}
+                fill="rgba(245,158,11,0.14)"
+                stroke="#f59e0b"
+                strokeWidth={1.5}
+              />
+              <text
+                x={step.x + 100}
+                y={456}
+                textAnchor="middle"
+                fill="#fbbf24"
+                fontSize={10.5}
+                fontWeight="700"
+                fontFamily="Inter, sans-serif"
+              >
+                {step.label}
+              </text>
+              <text
+                x={step.x + 100}
+                y={470}
+                textAnchor="middle"
+                fill="#cbd5e1"
+                fontSize={8.6}
+                fontFamily="Inter, sans-serif"
+              >
+                {step.sublabel}
+              </text>
+            </g>
           ))}
 
-          <Arrow x1={350} y1={456} x2={388} y2={456} color="amber" />
-          <Arrow x1={592} y1={456} x2={630} y2={456} color="amber" />
+          <line x1={350} y1={457} x2={384} y2={457} stroke="#f59e0b" strokeWidth={2.2} markerEnd="url(#ah-step-amber)" />
+          <line x1={592} y1={457} x2={626} y2={457} stroke="#f59e0b" strokeWidth={2.2} markerEnd="url(#ah-step-amber)" />
         </svg>
       </div>
     </SlideLayout>

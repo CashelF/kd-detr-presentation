@@ -1,20 +1,27 @@
 export function ArrowDefs() {
+  const colors = {
+    neutral: '#7f756b',
+    blue: '#e7e0d6',
+    green: '#8ea07d',
+    amber: '#b8915e',
+    red: '#ad6e5f',
+  };
   return (
     <defs>
       <marker id="ah" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
-        <polygon points="0 0, 7 2.5, 0 5" fill="#64748b" />
+        <polygon points="0 0, 7 2.5, 0 5" fill={colors.neutral} />
       </marker>
       <marker id="ah-blue" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
-        <polygon points="0 0, 7 2.5, 0 5" fill="#3b82f6" />
+        <polygon points="0 0, 7 2.5, 0 5" fill={colors.blue} />
       </marker>
       <marker id="ah-green" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
-        <polygon points="0 0, 7 2.5, 0 5" fill="#10b981" />
+        <polygon points="0 0, 7 2.5, 0 5" fill={colors.green} />
       </marker>
       <marker id="ah-amber" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
-        <polygon points="0 0, 7 2.5, 0 5" fill="#f59e0b" />
+        <polygon points="0 0, 7 2.5, 0 5" fill={colors.amber} />
       </marker>
       <marker id="ah-red" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
-        <polygon points="0 0, 7 2.5, 0 5" fill="#ef4444" />
+        <polygon points="0 0, 7 2.5, 0 5" fill={colors.red} />
       </marker>
     </defs>
   );
@@ -23,7 +30,11 @@ export function ArrowDefs() {
 export function Arrow({ x1, y1, x2, y2, color = '', dashed }) {
   const markerId = color ? `ah-${color}` : 'ah';
   const strokeColor = {
-    blue: '#3b82f6', green: '#10b981', amber: '#f59e0b', red: '#ef4444', '': '#64748b'
+    blue: '#e7e0d6',
+    green: '#8ea07d',
+    amber: '#b8915e',
+    red: '#ad6e5f',
+    '': '#7f756b',
   }[color];
   return (
     <line x1={x1} y1={y1} x2={x2} y2={y2}
@@ -32,7 +43,7 @@ export function Arrow({ x1, y1, x2, y2, color = '', dashed }) {
   );
 }
 
-export function Box({ x, y, w, h, label, sublabel, color = '#1e293b', border = '#334155', textColor = '#f8fafc', fontSize = 13, rx = 6 }) {
+export function Box({ x, y, w, h, label, sublabel, color = '#221d1a', border = '#4a4138', textColor = '#f6f0e8', fontSize = 13, rx = 6 }) {
   return (
     <g>
       <rect x={x} y={y} width={w} height={h} fill={color} stroke={border} strokeWidth={1.5} rx={rx} />
@@ -42,7 +53,7 @@ export function Box({ x, y, w, h, label, sublabel, color = '#1e293b', border = '
       </text>
       {sublabel && (
         <text x={x + w / 2} y={y + h / 2 + 9} textAnchor="middle" dominantBaseline="middle"
-          fill="#94a3b8" fontSize={9} fontFamily="Inter, sans-serif">
+          fill="#b5aba0" fontSize={9} fontFamily="Inter, sans-serif">
           {sublabel}
         </text>
       )}

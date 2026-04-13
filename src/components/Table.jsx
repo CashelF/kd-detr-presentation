@@ -16,10 +16,10 @@ export default function Table({ headers, rows, highlightRow, caption, compact })
           <tbody>
             {rows.map((row, ri) => (
               <tr key={ri} className={`border-b border-slide-border/50 last:border-0
-                ${highlightRow === ri ? 'bg-slide-accent/10' : ri % 2 === 0 ? 'bg-slide-bg' : 'bg-slide-surface/30'}`}>
+                ${highlightRow === ri ? 'bg-slide-accent/8' : ri % 2 === 0 ? 'bg-slide-bg' : 'bg-slide-surface/30'}`}>
                 {row.map((cell, ci) => (
                   <td key={ci} className={`${compact ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'} whitespace-nowrap
-                    ${highlightRow === ri ? 'text-slide-accent font-semibold' : 'text-slide-text'}`}>
+                    ${highlightRow === ri ? 'text-slide-text font-semibold' : 'text-slide-text'}`}>
                     {cell}
                   </td>
                 ))}

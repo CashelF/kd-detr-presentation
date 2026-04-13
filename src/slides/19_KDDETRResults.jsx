@@ -1,6 +1,6 @@
 import SlideLayout from '../components/SlideLayout';
 import Table from '../components/Table';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const chartData = [
   { name: 'Def.DETR', baseline: 43.8, detrdistill: 45.8, kddetr: 46.7, teacher: 46.9 },
@@ -12,8 +12,8 @@ const chartData = [
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload) {
     return (
-      <div className="bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-xs">
-        <div className="font-semibold text-white mb-1">{label}</div>
+      <div className="bg-slide-surface border border-slide-border rounded-lg px-3 py-2 text-xs shadow-lg">
+        <div className="font-semibold text-slide-text mb-1">{label}</div>
         {payload.map((p, i) => (
           <div key={i} style={{ color: p.color }}>{p.name}: {p.value} AP</div>
         ))}
@@ -64,24 +64,24 @@ export default function KDDETRResultsSlide() {
           <div className="flex-1 min-h-0">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} margin={{ top: 10, right: 5, left: -10, bottom: 5 }} barGap={1} barSize={16}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                <YAxis domain={[40, 53]} tick={{ fill: '#94a3b8', fontSize: 10 }}
-                  label={{ value: 'AP (%)', angle: -90, position: 'insideLeft', fill: '#94a3b8', fontSize: 10, offset: 15 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#4a4138" />
+                <XAxis dataKey="name" tick={{ fill: '#b5aba0', fontSize: 10 }} />
+                <YAxis domain={[40, 53]} tick={{ fill: '#b5aba0', fontSize: 10 }}
+                  label={{ value: 'AP (%)', angle: -90, position: 'insideLeft', fill: '#b5aba0', fontSize: 10, offset: 15 }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="baseline" name="Baseline" fill="#64748b" radius={[2, 2, 0, 0]} opacity={0.5} />
-                <Bar dataKey="detrdistill" name="DETRDistill" fill="#10b981" radius={[2, 2, 0, 0]} opacity={0.7} />
-                <Bar dataKey="kddetr" name="KD-DETR" fill="#f59e0b" radius={[2, 2, 0, 0]} />
-                <Bar dataKey="teacher" name="Teacher" fill="#3b82f6" radius={[2, 2, 0, 0]} opacity={0.35} />
+                <Bar dataKey="baseline" name="Baseline" fill="#6c635b" radius={[2, 2, 0, 0]} opacity={0.65} />
+                <Bar dataKey="detrdistill" name="DETRDistill" fill="#8ea07d" radius={[2, 2, 0, 0]} opacity={0.85} />
+                <Bar dataKey="kddetr" name="KD-DETR" fill="#b8915e" radius={[2, 2, 0, 0]} />
+                <Bar dataKey="teacher" name="Teacher" fill="#e7e0d6" radius={[2, 2, 0, 0]} opacity={0.65} />
               </BarChart>
             </ResponsiveContainer>
           </div>
           {/* Legend */}
-          <div className="flex justify-center gap-3 text-xs mt-1 flex-wrap">
-            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-[#64748b] opacity-50" /> Baseline</span>
-            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-[#10b981] opacity-70" /> DETRDistill</span>
-            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-[#f59e0b]" /> KD-DETR</span>
-            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-[#3b82f6] opacity-35" /> Teacher</span>
+          <div className="flex justify-center gap-3 text-xs mt-1 flex-wrap text-slide-muted">
+            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-[#6c635b] opacity-65" /> Baseline</span>
+            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-[#8ea07d] opacity-85" /> DETRDistill</span>
+            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-[#b8915e]" /> KD-DETR</span>
+            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-[#e7e0d6] opacity-70" /> Teacher</span>
           </div>
 
           {/* DINO callout */}

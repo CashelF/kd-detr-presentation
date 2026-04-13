@@ -1,5 +1,5 @@
 import SlideLayout from '../components/SlideLayout';
-import { ArrowDefs, Arrow } from '../components/DiagramArrow';
+import { ArrowDefs } from '../components/DiagramArrow';
 
 export default function KDChallengeSlide() {
   return (
@@ -33,11 +33,17 @@ export default function KDChallengeSlide() {
             <text x={280} y={165} textAnchor="middle" fill="#10b981" fontSize={10} fontFamily="Inter">Spatial Feature Map</text>
 
             {/* Correspondence arrows - same spatial locations */}
-            {[0,1,2].map(i => (
-              <g key={`corr-${i}`}>
-                <line x1={150 + i * 10} y1={60 + i * 25} x2={202 + i * 10} y2={60 + i * 25}
-                  stroke="#f59e0b" strokeWidth={2} strokeDasharray="4 3" />
-              </g>
+            {[52, 76, 100, 124].map((y, i) => (
+              <line
+                key={`corr-${i}`}
+                x1={168}
+                y1={y}
+                x2={216}
+                y2={y}
+                stroke="#f59e0b"
+                strokeWidth={2}
+                strokeDasharray="4 3"
+              />
             ))}
 
             {/* Check mark */}

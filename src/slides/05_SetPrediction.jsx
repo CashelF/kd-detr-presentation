@@ -2,32 +2,65 @@ import SlideLayout from '../components/SlideLayout';
 import { ArrowDefs } from '../components/DiagramArrow';
 
 export default function SetPredictionSlide() {
-  const matchColors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444'];
+  const objectStyles = [
+    { label: 'car', color: '#e7e0d6' },
+    { label: 'person', color: '#8ea07d' },
+    { label: 'dog', color: '#b8915e' },
+    { label: 'bicycle', color: '#ad6e5f' },
+  ];
+
+  const matches = [
+    { predIndex: 0, gtIndex: 2 },
+    { predIndex: 1, gtIndex: 0 },
+    { predIndex: 2, gtIndex: 3 },
+    { predIndex: 3, gtIndex: 1 },
+  ];
+
+  const predictionSlots = [0, 1, 2, 3, 4, 5].map((i) => {
+    const match = matches.find((item) => item.predIndex === i);
+
+    if (!match) {
+      return {
+        label: 'no object',
+        fill: '#221d1a',
+        stroke: '#4a4138',
+        textColor: '#6c635b',
+        matched: false,
+      };
+    }
+
+    const object = objectStyles[match.gtIndex];
+    return {
+      label: `query ${i + 1}`,
+      fill: `${object.color}15`,
+      stroke: object.color,
+      textColor: object.color,
+      matched: true,
+    };
+  });
 
   return (
     <SlideLayout title="DETR: Set Prediction & Hungarian Matching" subtitle="DETR Introduction" section="detr">
-      <div className="flex gap-6 h-full items-center">
+      <div className="flex gap-6 h-full pt-2">
         {/* Left: Hungarian matching diagram */}
-        <div className="flex-1 h-full flex items-center">
-          <svg viewBox="0 0 520 400" className="w-full">
+        <div className="flex-1 min-w-0 h-full flex items-start justify-center">
+          <svg viewBox="0 0 520 400" className="w-full max-w-[680px]">
             <ArrowDefs />
 
             {/* Predictions column */}
             <text x={80} y={25} textAnchor="middle" fill="#94a3b8" fontSize={13} fontWeight="600" fontFamily="Inter">
-              Predictions (N=6)
+              Prediction Slots (N=6)
             </text>
-            {[0,1,2,3,4,5].map(i => {
-              const matched = i < 4;
-              const color = matched ? matchColors[i] : '#334155';
-              const labels = ['pred 1', 'pred 2', 'pred 3', 'pred 4', 'no object', 'no object'];
+            {predictionSlots.map((slot, i) => {
               return (
                 <g key={`pred-${i}`}>
                   <rect x={20} y={38 + i * 50} width={120} height={38} rx={6}
-                    fill={matched ? `${color}15` : '#1e293b'}
-                    stroke={color} strokeWidth={matched ? 2 : 1} />
-                  <text x={80} y={61 + i * 50} textAnchor="middle" fill={matched ? color : '#64748b'}
-                    fontSize={11} fontWeight={matched ? '600' : '400'} fontFamily="Inter">
-                    {labels[i]}
+                    fill={slot.fill}
+                    stroke={slot.stroke}
+                    strokeWidth={slot.matched ? 2 : 1} />
+                  <text x={80} y={61 + i * 50} textAnchor="middle" fill={slot.textColor}
+                    fontSize={11} fontWeight={slot.matched ? '600' : '400'} fontFamily="Inter">
+                    {slot.label}
                   </text>
                 </g>
               );
@@ -37,36 +70,30 @@ export default function SetPredictionSlide() {
             <text x={440} y={25} textAnchor="middle" fill="#94a3b8" fontSize={13} fontWeight="600" fontFamily="Inter">
               Ground Truth (M=4)
             </text>
-            {[0,1,2,3].map(i => {
-              const labels = ['car', 'person', 'dog', 'bicycle'];
+            {objectStyles.map((object, i) => {
               return (
                 <g key={`gt-${i}`}>
                   <rect x={380} y={38 + i * 50} width={120} height={38} rx={6}
-                    fill={`${matchColors[i]}15`}
-                    stroke={matchColors[i]} strokeWidth={2} />
-                  <text x={440} y={61 + i * 50} textAnchor="middle" fill={matchColors[i]}
+                    fill={`${object.color}15`}
+                    stroke={object.color} strokeWidth={2} />
+                  <text x={440} y={61 + i * 50} textAnchor="middle" fill={object.color}
                     fontSize={11} fontWeight="600" fontFamily="Inter">
-                    {labels[i]}
+                    {object.label}
                   </text>
                 </g>
               );
             })}
 
             {/* Matching lines - crossing to show non-trivial assignment */}
-            {[
-              { pi: 0, gi: 2, color: matchColors[0] },  // pred 1 -> dog
-              { pi: 1, gi: 0, color: matchColors[1] },  // pred 2 -> car
-              { pi: 2, gi: 3, color: matchColors[2] },  // pred 3 -> bicycle
-              { pi: 3, gi: 1, color: matchColors[3] },  // pred 4 -> person
-            ].map(({ pi, gi, color }, idx) => (
+            {matches.map(({ predIndex, gtIndex }, idx) => (
               <line key={idx}
-                x1={142} y1={57 + pi * 50}
-                x2={378} y2={57 + gi * 50}
-                stroke={color} strokeWidth={2} strokeDasharray="6 4" opacity={0.6} />
+                x1={142} y1={57 + predIndex * 50}
+                x2={378} y2={57 + gtIndex * 50}
+                stroke={objectStyles[gtIndex].color} strokeWidth={2} strokeDasharray="6 4" opacity={0.65} />
             ))}
 
             {/* Center label */}
-            <rect x={195} y={135} width={130} height={36} rx={8} fill="#1e293b" stroke="#475569" strokeWidth={1} />
+            <rect x={195} y={135} width={130} height={36} rx={8} fill="#221d1a" stroke="#4a4138" strokeWidth={1} />
             <text x={260} y={150} textAnchor="middle" fill="#94a3b8" fontSize={10} fontFamily="Inter" fontStyle="italic">
               Optimal 1-to-1
             </text>
@@ -75,19 +102,19 @@ export default function SetPredictionSlide() {
             </text>
 
             {/* Unmatched note */}
-            <text x={80} y={355} textAnchor="middle" fill="#475569" fontSize={10} fontFamily="Inter">
+            <text x={80} y={347} textAnchor="middle" fill="#475569" fontSize={10} fontFamily="Inter">
               Unmatched slots trained
             </text>
-            <text x={80} y={368} textAnchor="middle" fill="#475569" fontSize={10} fontFamily="Inter">
-              to predict "no object"
+            <text x={80} y={360} textAnchor="middle" fill="#475569" fontSize={10} fontFamily="Inter">
+              to predict &quot;no object&quot;
             </text>
 
             {/* Loss function */}
-            <rect x={185} y={340} width={190} height={42} rx={8} fill="#1e293b" stroke="#334155" strokeWidth={1} />
-            <text x={280} y={360} textAnchor="middle" fill="#94a3b8" fontSize={11} fontFamily="JetBrains Mono, monospace">
+            <rect x={185} y={332} width={190} height={42} rx={8} fill="#221d1a" stroke="#4a4138" strokeWidth={1} />
+            <text x={280} y={352} textAnchor="middle" fill="#94a3b8" fontSize={11} fontFamily="JetBrains Mono, monospace">
               L = L_cls + L_box + L_giou
             </text>
-            <text x={280} y={375} textAnchor="middle" fill="#475569" fontSize={9} fontFamily="Inter">
+            <text x={280} y={367} textAnchor="middle" fill="#475569" fontSize={9} fontFamily="Inter">
               Set prediction loss
             </text>
           </svg>

@@ -1,21 +1,79 @@
 import SlideLayout from '../components/SlideLayout';
+import carPhoto from '../assets/object-detection-car.jpg';
+import personPhoto from '../assets/object-detection-person.jpg';
+import dogPhoto from '../assets/object-detection-dog.jpg';
+import bicyclePhoto from '../assets/object-detection-bicycle.jpg';
 
 export default function ObjectDetectionSlide() {
   return (
     <SlideLayout title="Object Detection: The Task" subtitle="DETR Introduction" section="detr">
-      <div className="flex gap-8 mt-2 h-full items-center">
+      <div className="flex gap-6 mt-1 h-full items-start pb-4">
         {/* Left: visual of detection */}
-        <div className="flex-1">
-          <svg viewBox="0 0 480 340" className="w-full">
+        <div className="flex-1 min-w-0 pt-1">
+          <svg viewBox="0 0 480 340" className="w-full h-auto max-h-[500px]">
+            <defs>
+              <clipPath id="car-region">
+                <rect x={30} y={50} width={140} height={100} rx={4} />
+              </clipPath>
+              <clipPath id="person-region">
+                <rect x={200} y={80} width={100} height={140} rx={4} />
+              </clipPath>
+              <clipPath id="dog-region">
+                <rect x={330} y={60} width={120} height={90} rx={4} />
+              </clipPath>
+              <clipPath id="bicycle-region">
+                <rect x={340} y={180} width={110} height={80} rx={4} />
+              </clipPath>
+            </defs>
+
             {/* Image placeholder */}
             <rect x={0} y={0} width={480} height={340} rx={12} fill="#1e293b" stroke="#334155" strokeWidth={1} />
             <text x={240} y={30} textAnchor="middle" fill="#475569" fontSize={12} fontFamily="Inter">Input Image</text>
 
-            {/* Simulated scene elements */}
+            {/* Example objects */}
             <rect x={30} y={50} width={140} height={100} rx={4} fill="#0f172a" stroke="#334155" />
+            <image
+              href={carPhoto}
+              x={30}
+              y={50}
+              width={140}
+              height={100}
+              preserveAspectRatio="xMidYMid slice"
+              clipPath="url(#car-region)"
+            />
+
             <rect x={200} y={80} width={100} height={140} rx={4} fill="#0f172a" stroke="#334155" />
+            <image
+              href={personPhoto}
+              x={200}
+              y={80}
+              width={100}
+              height={140}
+              preserveAspectRatio="xMidYMid slice"
+              clipPath="url(#person-region)"
+            />
+
             <rect x={330} y={60} width={120} height={90} rx={4} fill="#0f172a" stroke="#334155" />
+            <image
+              href={dogPhoto}
+              x={330}
+              y={60}
+              width={120}
+              height={90}
+              preserveAspectRatio="xMidYMid slice"
+              clipPath="url(#dog-region)"
+            />
+
             <rect x={340} y={180} width={110} height={80} rx={4} fill="#0f172a" stroke="#334155" />
+            <image
+              href={bicyclePhoto}
+              x={340}
+              y={180}
+              width={110}
+              height={80}
+              preserveAspectRatio="xMidYMid slice"
+              clipPath="url(#bicycle-region)"
+            />
 
             {/* Bounding boxes */}
             <rect x={25} y={45} width={150} height={110} rx={3} fill="none" stroke="#3b82f6" strokeWidth={2.5} />
@@ -51,16 +109,16 @@ export default function ObjectDetectionSlide() {
         </div>
 
         {/* Right: key points */}
-        <div className="w-56 flex flex-col gap-4">
-          <div className="bg-slide-surface rounded-lg p-4 border border-slide-border/50">
+        <div className="w-52 shrink-0 flex flex-col gap-3">
+          <div className="bg-slide-surface rounded-lg p-3.5 border border-slide-border/50">
             <div className="text-xs font-semibold text-slide-accent mb-1">Goal</div>
             <div className="text-sm text-slide-text">Locate and classify every object instance in an image</div>
           </div>
-          <div className="bg-slide-surface rounded-lg p-4 border border-slide-border/50">
+          <div className="bg-slide-surface rounded-lg p-3.5 border border-slide-border/50">
             <div className="text-xs font-semibold text-slide-green mb-1">Output Format</div>
             <div className="text-sm text-slide-text">Set of (class label, bounding box coordinates, confidence score)</div>
           </div>
-          <div className="bg-slide-surface rounded-lg p-4 border border-slide-border/50">
+          <div className="bg-slide-surface rounded-lg p-3.5 border border-slide-border/50">
             <div className="text-xs font-semibold text-slide-amber mb-1">Benchmark</div>
             <div className="text-sm text-slide-text">MS COCO: 80 classes, evaluated by mAP metric</div>
           </div>

@@ -1,5 +1,5 @@
 import SlideLayout from '../components/SlideLayout';
-import { ArrowDefs, Arrow, Box } from '../components/DiagramArrow';
+import { ArrowDefs, Arrow } from '../components/DiagramArrow';
 
 export default function DETRArchitectureSlide() {
   return (
@@ -29,17 +29,18 @@ export default function DETRArchitectureSlide() {
           <Arrow x1={275} y1={150} x2={308} y2={150} />
 
           {/* Feature Map + Positional Encoding */}
-          <rect x={310} y={80} width={100} height={140} rx={8} fill="rgba(139,92,246,0.1)" stroke="#8b5cf6" strokeWidth={1.5} />
+          <rect x={310} y={76} width={116} height={146} rx={8} fill="rgba(139,92,246,0.1)" stroke="#8b5cf6" strokeWidth={1.5} />
           {/* Grid pattern for feature map */}
           {[0,1,2,3,4].map(r => [0,1,2,3].map(c => (
-            <rect key={`${r}-${c}`} x={323 + c * 18} y={95 + r * 18} width={14} height={14} rx={2}
+            <rect key={`${r}-${c}`} x={327 + c * 18} y={92 + r * 18} width={14} height={14} rx={2}
               fill={`rgba(139,92,246,${0.15 + Math.random() * 0.25})`} />
           )))}
-          <text x={360} y={200} textAnchor="middle" fill="#8b5cf6" fontSize={10} fontWeight="500" fontFamily="Inter">+ Pos. Encoding</text>
-          <text x={360} y={225} textAnchor="middle" fill="#94a3b8" fontSize={11} fontFamily="Inter">Flatten to Seq.</text>
+          <text x={368} y={191} textAnchor="middle" fill="#8b5cf6" fontSize={9.5} fontWeight="500" fontFamily="Inter">+ Positional</text>
+          <text x={368} y={204} textAnchor="middle" fill="#8b5cf6" fontSize={9.5} fontWeight="500" fontFamily="Inter">Encoding</text>
+          <text x={368} y={235} textAnchor="middle" fill="#94a3b8" fontSize={11} fontFamily="Inter">Flatten to Seq.</text>
 
           {/* Arrow to encoder */}
-          <Arrow x1={415} y1={150} x2={448} y2={150} />
+          <Arrow x1={431} y1={150} x2={448} y2={150} />
 
           {/* Transformer Encoder */}
           <rect x={450} y={70} width={120} height={160} rx={8} fill="rgba(16,185,129,0.1)" stroke="#10b981" strokeWidth={1.5} />
@@ -101,7 +102,7 @@ export default function DETRArchitectureSlide() {
 
           {/* Bottom labels */}
           <text x={480} y={290} textAnchor="middle" fill="#475569" fontSize={11} fontFamily="Inter" fontStyle="italic">
-            Carion et al., "End-to-End Object Detection with Transformers" (ECCV 2020)
+            Carion et al., &quot;End-to-End Object Detection with Transformers&quot; (ECCV 2020)
           </text>
 
           {/* Key innovation callout */}

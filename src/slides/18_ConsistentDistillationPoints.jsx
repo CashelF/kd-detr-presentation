@@ -191,8 +191,8 @@ export default function ConsistentDistillationPointsSlide() {
           <line x1={239} y1={454} x2={425} y2={454} stroke="#ef4444" strokeWidth={2.5} strokeDasharray="8 6" />
           <line x1={555} y1={454} x2={741} y2={454} stroke="#ef4444" strokeWidth={2.5} strokeDasharray="8 6" />
 
-          <rect x={618} y={265} width={284} height={22} rx={11} fill="rgba(16,185,129,0.09)" />
-          <text x={760} y={280} textAnchor="middle" fill="#34d399" fontSize={10.5} fontWeight="600" fontFamily="Inter, sans-serif">
+          <rect x={584} y={258} width={348} height={30} rx={15} fill="rgba(16,185,129,0.09)" />
+          <text x={758} y={277} textAnchor="middle" fill="#34d399" fontSize={10} fontWeight="600" fontFamily="Inter, sans-serif">
             Aligned features are now comparable at the same semantic locations
           </text>
         </svg>

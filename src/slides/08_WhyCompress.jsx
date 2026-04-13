@@ -12,8 +12,8 @@ const data = [
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload) {
     return (
-      <div className="bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-xs">
-        <div className="font-semibold text-white mb-1">{label}</div>
+      <div className="bg-slide-surface border border-slide-border rounded-lg px-3 py-2 text-xs shadow-lg">
+        <div className="font-semibold text-slide-text mb-1">{label}</div>
         {payload.map((p, i) => (
           <div key={i} style={{ color: p.color }}>{p.name}: {p.value}{p.name === 'AP' ? '' : p.name === 'GFLOPs' ? '' : 'M'}</div>
         ))}
@@ -33,22 +33,22 @@ export default function WhyCompressSlide() {
           <div className="flex-1 min-h-0">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                <YAxis yAxisId="left" tick={{ fill: '#94a3b8', fontSize: 10 }}
-                  label={{ value: 'Params (M)', angle: -90, position: 'insideLeft', fill: '#94a3b8', fontSize: 10 }} />
-                <YAxis yAxisId="right" orientation="right" tick={{ fill: '#94a3b8', fontSize: 10 }}
-                  label={{ value: 'GFLOPs', angle: 90, position: 'insideRight', fill: '#94a3b8', fontSize: 10 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#4a4138" />
+                <XAxis dataKey="name" tick={{ fill: '#b5aba0', fontSize: 10 }} />
+                <YAxis yAxisId="left" tick={{ fill: '#b5aba0', fontSize: 10 }}
+                  label={{ value: 'Params (M)', angle: -90, position: 'insideLeft', fill: '#b5aba0', fontSize: 10 }} />
+                <YAxis yAxisId="right" orientation="right" tick={{ fill: '#b5aba0', fontSize: 10 }}
+                  label={{ value: 'GFLOPs', angle: 90, position: 'insideRight', fill: '#b5aba0', fontSize: 10 }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Legend wrapperStyle={{ fontSize: 11, color: '#94a3b8' }} />
+                <Legend wrapperStyle={{ fontSize: 11, color: '#b5aba0' }} />
                 <Bar yAxisId="left" dataKey="params" name="Params (M)" radius={[4, 4, 0, 0]}>
                   {data.map((_, i) => (
-                    <Cell key={i} fill={i === data.length - 1 ? '#ef4444' : '#3b82f6'} opacity={0.8} />
+                    <Cell key={i} fill={i === data.length - 1 ? '#ad6e5f' : '#e7e0d6'} opacity={0.82} />
                   ))}
                 </Bar>
                 <Bar yAxisId="right" dataKey="gflops" name="GFLOPs" radius={[4, 4, 0, 0]}>
                   {data.map((_, i) => (
-                    <Cell key={i} fill={i === data.length - 1 ? '#f59e0b' : '#10b981'} opacity={0.8} />
+                    <Cell key={i} fill={i === data.length - 1 ? '#b8915e' : '#8ea07d'} opacity={0.82} />
                   ))}
                 </Bar>
               </BarChart>
@@ -58,7 +58,7 @@ export default function WhyCompressSlide() {
 
         {/* Right side info */}
         <div className="w-64 flex flex-col gap-3 pt-2">
-          <div className="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+          <div className="bg-slide-red/10 rounded-lg p-4 border border-slide-red/30">
             <div className="text-xs font-semibold text-slide-red mb-2">The Problem</div>
             <div className="text-xs text-slide-muted leading-relaxed">
               DINO-SwinL achieves 56.8 AP but requires 218M params and 1452 GFLOPs -- impractical for edge deployment.

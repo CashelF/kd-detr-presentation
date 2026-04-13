@@ -24,26 +24,6 @@ export default function TitleSlide() {
         <span>Spring 2026</span>
       </div>
 
-      {/* Mini architecture teaser */}
-      <svg viewBox="0 0 600 60" className="w-[500px] mt-10 opacity-40">
-        {['Image', 'Backbone', 'Encoder', 'Decoder', 'Predictions'].map((label, i) => (
-          <g key={i}>
-            <rect x={i * 120 + 5} y={10} width={100} height={36} rx={6}
-              fill="none" stroke="#334155" strokeWidth={1} />
-            <text x={i * 120 + 55} y={32} textAnchor="middle" fill="#64748b"
-              fontSize={11} fontFamily="Inter, sans-serif">{label}</text>
-            {i < 4 && (
-              <line x1={i * 120 + 107} y1={28} x2={i * 120 + 123} y2={28}
-                stroke="#334155" strokeWidth={1.5} markerEnd="url(#ah-title)" />
-            )}
-          </g>
-        ))}
-        <defs>
-          <marker id="ah-title" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
-            <polygon points="0 0, 6 2, 0 4" fill="#334155" />
-          </marker>
-        </defs>
-      </svg>
     </div>
   );
 }

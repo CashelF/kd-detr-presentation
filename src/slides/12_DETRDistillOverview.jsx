@@ -5,7 +5,7 @@ export default function DETRDistillOverviewSlide() {
   return (
     <SlideLayout title="DETRDistill: A Universal KD Framework" subtitle="DETRDistill (ICCV 2023)" section="detrdistill">
       <div className="flex flex-col h-full mt-1 justify-center">
-        <svg viewBox="0 15 920 380" className="w-full">
+        <svg viewBox="0 8 920 387" className="w-full">
           <ArrowDefs />
 
           {/* Teacher DETR (top) */}
@@ -68,7 +68,7 @@ export default function DETRDistillOverviewSlide() {
             Universal: works across DETR, Deformable DETR, Conditional DETR, DAB-DETR, DN-DETR, DINO
           </text>
           <text x={460} y={328} textAnchor="middle" fill="#64748b" fontSize={10} fontFamily="Inter">
-            Chang et al., "DETRDistill: A Universal Knowledge Distillation Framework for DETR-families" (ICCV 2023)
+            Chang et al., &quot;DETRDistill: A Universal Knowledge Distillation Framework for DETR-families&quot; (ICCV 2023)
           </text>
 
           {/* Total loss */}
