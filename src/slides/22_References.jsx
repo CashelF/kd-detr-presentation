@@ -17,14 +17,14 @@ const refs = [
   },
   {
     tag: 'DETRDistill',
-    authors: 'Chang, J., Wang, Z., Wang, J., Wang, H., & Han, J.',
+    authors: 'Chang, J., Wang, S., Xu, H., Chen, Z., Yang, C., & Zhao, F.',
     title: 'DETRDistill: A Universal Knowledge Distillation Framework for DETR-families',
     venue: 'ICCV 2023',
     color: '#8ea07d',
   },
   {
     tag: 'KD-DETR',
-    authors: 'Wang, Y., Ye, M., Lin, Z., Li, H., Zheng, Z., & Wang, S.',
+    authors: 'Wang, Y., Li, X., Weng, S., Zhang, G., Yue, H., Feng, H., Han, J., & Ding, E.',
     title: 'Knowledge Distillation for Detection Transformer with Consistent Distillation Points Sampling',
     venue: 'CVPR 2024',
     color: '#b8915e',
@@ -33,7 +33,7 @@ const refs = [
     tag: 'Hinton 2015',
     authors: 'Hinton, G., Vinyals, O., & Dean, J.',
     title: 'Distilling the Knowledge in a Neural Network',
-    venue: 'NeurIPS Workshop 2015',
+    venue: 'arXiv 2015 / NeurIPS Deep Learning Workshop',
     color: '#6c635b',
   },
 ];
