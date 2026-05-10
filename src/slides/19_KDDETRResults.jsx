@@ -68,7 +68,7 @@ export default function KDDETRResultsSlide() {
                 <XAxis dataKey="name" tick={{ fill: '#b5aba0', fontSize: 10 }} />
                 <YAxis domain={[40, 53]} tick={{ fill: '#b5aba0', fontSize: 10 }}
                   label={{ value: 'AP (%)', angle: -90, position: 'insideLeft', fill: '#b5aba0', fontSize: 10, offset: 15 }} />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip />} cursor={false} />
                 <Bar dataKey="baseline" name="Baseline" fill="#6c635b" radius={[2, 2, 0, 0]} opacity={0.65} />
                 <Bar dataKey="detrdistill" name="DETRDistill" fill="#8ea07d" radius={[2, 2, 0, 0]} opacity={0.85} />
                 <Bar dataKey="kddetr" name="KD-DETR" fill="#b8915e" radius={[2, 2, 0, 0]} />

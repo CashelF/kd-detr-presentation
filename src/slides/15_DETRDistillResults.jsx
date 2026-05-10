@@ -68,7 +68,7 @@ export default function DETRDistillResultsSlide() {
                 <XAxis dataKey="name" tick={{ fill: '#b5aba0', fontSize: 8 }} angle={-20} textAnchor="end" interval={0} height={50} />
                 <YAxis domain={[38, 48]} tick={{ fill: '#b5aba0', fontSize: 10 }}
                   label={{ value: 'AP (%)', angle: -90, position: 'insideLeft', fill: '#b5aba0', fontSize: 10, offset: 15 }} />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip />} cursor={false} />
                 <Bar dataKey="baseline" name="Baseline" fill="#6c635b" radius={[3, 3, 0, 0]} opacity={0.7} />
                 <Bar dataKey="distilled" name="DETRDistill" fill="#8ea07d" radius={[3, 3, 0, 0]} />
                 <Bar dataKey="teacher" name="Teacher" fill="#e7e0d6" radius={[3, 3, 0, 0]} opacity={0.65} />

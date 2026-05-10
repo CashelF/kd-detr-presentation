@@ -54,6 +54,7 @@ export default function ChenResultsSlide() {
                 <YAxis domain={[68, 76]} tick={{ fill: '#b5aba0', fontSize: 10 }}
                   label={{ value: 'mAP (%)', angle: -90, position: 'insideLeft', fill: '#b5aba0', fontSize: 10, offset: 15 }} />
                 <Tooltip
+                  cursor={false}
                   contentStyle={{ background: '#221d1a', border: '1px solid #4a4138', borderRadius: 8, fontSize: 11 }}
                   labelStyle={{ color: '#f6f0e8' }}
                 />

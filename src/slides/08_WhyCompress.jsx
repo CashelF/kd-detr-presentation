@@ -39,7 +39,7 @@ export default function WhyCompressSlide() {
                   label={{ value: 'Params (M)', angle: -90, position: 'insideLeft', fill: '#b5aba0', fontSize: 10 }} />
                 <YAxis yAxisId="right" orientation="right" tick={{ fill: '#b5aba0', fontSize: 10 }}
                   label={{ value: 'GFLOPs', angle: 90, position: 'insideRight', fill: '#b5aba0', fontSize: 10 }} />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip />} cursor={false} />
                 <Legend wrapperStyle={{ fontSize: 11, color: '#b5aba0' }} />
                 <Bar yAxisId="left" dataKey="params" name="Params (M)" radius={[4, 4, 0, 0]}>
                   {data.map((_, i) => (

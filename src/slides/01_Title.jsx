@@ -23,7 +23,6 @@ export default function TitleSlide() {
         <span className="w-1 h-1 rounded-full bg-slide-border" />
         <span>Spring 2026</span>
       </div>
-
     </div>
   );
 }

@@ -2,17 +2,17 @@ import SlideLayout from '../components/SlideLayout';
 import { ArrowDefs } from '../components/DiagramArrow';
 
 const carPoints = [
-  [92, 129],
-  [114, 145],
-  [148, 121],
-  [172, 137],
+  [90, 138],
+  [112, 148],
+  [146, 139],
+  [168, 148],
 ];
 
 const personPoints = [
-  [228, 165],
-  [248, 173],
-  [272, 158],
-  [296, 168],
+  [228, 152],
+  [248, 164],
+  [272, 150],
+  [296, 162],
 ];
 
 const queryBlocks = [
@@ -52,7 +52,7 @@ export default function ConsistentDistillationPointsSlide() {
           </text>
 
           <rect x={64} y={106} width={118} height={50} rx={10} fill="rgba(59,130,246,0.06)" stroke="#3b82f6" strokeWidth={1.8} strokeDasharray="6 5" />
-          <text x={123} y={124} textAnchor="middle" fill="#60a5fa" fontSize={8.5} fontWeight="600" fontFamily="Inter, sans-serif">
+          <text x={123} y={121} textAnchor="middle" fill="#60a5fa" fontSize={8.5} fontWeight="600" fontFamily="Inter, sans-serif">
             car region
           </text>
           {carPoints.map(([cx, cy], i) => (
@@ -60,7 +60,7 @@ export default function ConsistentDistillationPointsSlide() {
           ))}
 
           <rect x={208} y={118} width={110} height={56} rx={10} fill="rgba(16,185,129,0.06)" stroke="#10b981" strokeWidth={1.8} strokeDasharray="6 5" />
-          <text x={263} y={137} textAnchor="middle" fill="#34d399" fontSize={8.5} fontWeight="600" fontFamily="Inter, sans-serif">
+          <text x={263} y={134} textAnchor="middle" fill="#34d399" fontSize={8.5} fontWeight="600" fontFamily="Inter, sans-serif">
             person region
           </text>
           {personPoints.map(([cx, cy], i) => (

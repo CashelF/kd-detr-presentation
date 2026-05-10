@@ -39,6 +39,18 @@ code, .mono {
   font-family: 'JetBrains Mono', monospace;
 }
 
+.recharts-wrapper,
+.recharts-wrapper * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.recharts-wrapper:focus,
+.recharts-wrapper:focus-visible,
+.recharts-wrapper svg *:focus,
+.recharts-wrapper svg *:focus-visible {
+  outline: none !important;
+}
+
 .slide-table::-webkit-scrollbar {
   height: 4px;
 }
