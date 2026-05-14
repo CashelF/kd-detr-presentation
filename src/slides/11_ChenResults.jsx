@@ -1,71 +1,127 @@
 import SlideLayout from '../components/SlideLayout';
 import Table from '../components/Table';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ReferenceLine } from 'recharts';
 
 const data = [
-  { name: 'Student\n(baseline)', mAP: 70.1, color: '#8ea07d' },
-  { name: '+ Cls KD', mAP: 71.8, color: '#b8915e' },
-  { name: '+ Feat KD', mAP: 72.4, color: '#948094' },
-  { name: '+ Reg KD', mAP: 72.0, color: '#78958f' },
-  { name: 'Full KD', mAP: 73.2, color: '#e7e0d6' },
-  { name: 'Teacher', mAP: 75.6, color: '#6c635b' },
+  { name: 'Baseline', mAP: 54.7, color: '#8ea07d' },
+  { name: 'L2-B', mAP: 55.9, color: '#78958f' },
+  { name: 'CLS-W', mAP: 57.7, color: '#b8915e' },
+  { name: 'Hints-A', mAP: 58.0, color: '#948094' },
+  { name: 'L2-B +\nCLS-W', mAP: 58.4, color: '#c0a276' },
+  { name: 'Full', mAP: 59.4, color: '#e7e0d6' },
 ];
 
 export default function ChenResultsSlide() {
+  const minAP = 54;
+  const maxAP = 60;
+  const chartTop = 20;
+  const chartLeft = 48;
+  const chartWidth = 252;
+  const chartHeight = 285;
+  const barWidth = 28;
+  const xStep = chartWidth / data.length;
+  const yFor = (value) => chartTop + ((maxAP - value) / (maxAP - minAP)) * chartHeight;
+  const gridTicks = [54, 56, 58, 60];
+
   return (
     <SlideLayout title="Chen et al. 2017: Results & Ablation" subtitle="Chen et al. (NeurIPS 2017)" section="chen">
       <div className="flex gap-6 h-full mt-1">
         {/* Table */}
         <div className="flex-1 flex flex-col gap-4">
           <Table
-            headers={['Method', 'Backbone', 'mAP', 'mAP Gain']}
+            headers={['Dataset', 'Baseline', 'L2', 'L2-B', 'CLS', 'CLS-W', 'Hints', 'Hints-A', 'Distill', 'Full']}
             rows={[
-              ['Teacher (Faster R-CNN)', 'ResNet-101', '75.6', '--'],
-              ['Student (baseline)', 'ResNet-50', '70.1', '--'],
-              ['+ Feature imitation', 'ResNet-50', '72.4', '+2.3'],
-              ['+ Classification KD', 'ResNet-50', '71.8', '+1.7'],
-              ['+ Regression KD', 'ResNet-50', '72.0', '+1.9'],
-              ['Full pipeline', 'ResNet-50', '73.2', '+3.1'],
+              ['PASCAL', '54.7', '54.6', '55.9', '57.4', '57.7', '56.9', '58.0', '58.4', '59.4'],
+              ['KITTI', '49.3', '48.5', '50.1', '50.8', '51.3', '50.3', '52.1', '51.7', '53.7'],
             ]}
-            highlightRow={5}
-            caption="PASCAL VOC 2007 test results (mAP %)"
+            highlightRow={0}
+            compact
+            caption="Chen et al. Table 4: VGG16 teacher, Tucker-compressed student, mAP (%). Distill = L2-B + CLS-W; Full = L2-B + CLS-W + Hints-A."
           />
 
           <div className="flex gap-3">
             <div className="flex-1 bg-slide-surface rounded-lg p-3 border border-slide-border/50">
               <div className="text-xs font-semibold text-slide-green mb-1">Takeaway</div>
-              <div className="text-xs text-slide-muted">Feature imitation provides the largest individual gain. Combining all three distillation losses yields the best results.</div>
+              <div className="text-xs text-slide-muted">Bounded box regression, weighted classification distillation, and adapted hints combine for the best mAP: +4.7 on PASCAL and +4.4 on KITTI.</div>
             </div>
             <div className="flex-1 bg-slide-surface rounded-lg p-3 border border-slide-border/50">
               <div className="text-xs font-semibold text-slide-red mb-1">Limitation</div>
-              <div className="text-xs text-slide-muted">Relies on anchor-based spatial correspondence. Cannot be directly applied to anchor-free methods like DETR.</div>
+              <div className="text-xs text-slide-muted">Built around Faster R-CNN-style proposal classification and box regression, so it does not directly solve DETR's set-prediction alignment problem.</div>
             </div>
           </div>
         </div>
 
         {/* Chart */}
         <div className="w-80 flex flex-col">
-          <div className="text-xs text-slide-muted mb-2">Ablation: contribution of each KD component</div>
+          <div className="text-xs text-slide-muted mb-2">PASCAL ablation from Chen et al. Table 4</div>
           <div className="flex-1 min-h-0">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data} margin={{ top: 10, right: 10, left: -10, bottom: 40 }} barSize={36}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#4a4138" />
-                <XAxis dataKey="name" tick={{ fill: '#b5aba0', fontSize: 9 }} angle={-25} textAnchor="end" interval={0} height={50} />
-                <YAxis domain={[68, 76]} tick={{ fill: '#b5aba0', fontSize: 10 }}
-                  label={{ value: 'mAP (%)', angle: -90, position: 'insideLeft', fill: '#b5aba0', fontSize: 10, offset: 15 }} />
-                <Tooltip
-                  cursor={false}
-                  contentStyle={{ background: '#221d1a', border: '1px solid #4a4138', borderRadius: 8, fontSize: 11 }}
-                  labelStyle={{ color: '#f6f0e8' }}
-                />
-                <ReferenceLine y={75.6} stroke="#6c635b" strokeDasharray="4 4" label={{ value: 'Teacher', fill: '#6c635b', fontSize: 10 }} />
-                <Bar dataKey="mAP" radius={[4, 4, 0, 0]}>
-                  {data.map((d, i) => (
-                    <Cell key={i} fill={d.color} opacity={0.85} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+            <svg viewBox="0 0 320 380" className="w-full h-full overflow-visible">
+              {gridTicks.map((tick) => {
+                const y = yFor(tick);
+                return (
+                  <g key={tick}>
+                    <line x1={chartLeft} y1={y} x2={chartLeft + chartWidth} y2={y} stroke="#4a4138" strokeDasharray="3 3" />
+                    <text x={chartLeft - 10} y={y + 4} textAnchor="end" fill="#b5aba0" fontSize={10} fontFamily="Inter">
+                      {tick}
+                    </text>
+                  </g>
+                );
+              })}
+
+              <line x1={chartLeft} y1={chartTop} x2={chartLeft} y2={chartTop + chartHeight} stroke="#6c635b" />
+              <line x1={chartLeft} y1={chartTop + chartHeight} x2={chartLeft + chartWidth} y2={chartTop + chartHeight} stroke="#6c635b" />
+              <line
+                x1={chartLeft}
+                y1={yFor(54.7)}
+                x2={chartLeft + chartWidth}
+                y2={yFor(54.7)}
+                stroke="#6c635b"
+                strokeDasharray="4 4"
+              />
+              <text x={chartLeft + chartWidth - 2} y={yFor(54.7) - 5} textAnchor="end" fill="#8f857a" fontSize={9} fontFamily="Inter">
+                Baseline
+              </text>
+
+              <text
+                x={16}
+                y={chartTop + chartHeight / 2}
+                textAnchor="middle"
+                fill="#b5aba0"
+                fontSize={10}
+                fontFamily="Inter"
+                transform={`rotate(-90 16 ${chartTop + chartHeight / 2})`}
+              >
+                mAP (%)
+              </text>
+
+              {data.map((d, i) => {
+                const x = chartLeft + i * xStep + (xStep - barWidth) / 2;
+                const y = yFor(d.mAP);
+                const height = chartTop + chartHeight - y;
+                return (
+                  <g key={d.name}>
+                    <rect x={x} y={y} width={barWidth} height={height} rx={4} fill={d.color} opacity={0.9} />
+                    <text x={x + barWidth / 2} y={y - 6} textAnchor="middle" fill="#f6f0e8" fontSize={10} fontWeight="600" fontFamily="Inter">
+                      {d.mAP.toFixed(1)}
+                    </text>
+                    <text
+                      x={x + barWidth / 2}
+                      y={chartTop + chartHeight + 22}
+                      textAnchor="end"
+                      fill="#b5aba0"
+                      fontSize={9}
+                      fontFamily="Inter"
+                      transform={`rotate(-28 ${x + barWidth / 2} ${chartTop + chartHeight + 22})`}
+                    >
+                      {d.name.split('\n').map((line, lineIndex) => (
+                        <tspan key={line} x={x + barWidth / 2} dy={lineIndex === 0 ? 0 : 10}>
+                          {line}
+                        </tspan>
+                      ))}
+                    </text>
+                  </g>
+                );
+              })}
+            </svg>
           </div>
         </div>
       </div>

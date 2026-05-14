@@ -62,13 +62,13 @@ export default function KDDETRFrameworkSlide() {
 
           {/* CDP sub-modules */}
           <rect x={555} y={162} width={170} height={30} rx={5} fill="#1e293b" stroke="#f59e0b" strokeWidth={1} />
-          <text x={640} y={181} textAnchor="middle" fill="#f59e0b" fontSize={9} fontWeight="500" fontFamily="Inter">1. Sample Reference Points</text>
+          <text x={640} y={181} textAnchor="middle" fill="#f59e0b" fontSize={9} fontWeight="500" fontFamily="Inter">1. Sample CDP Queries</text>
 
           <rect x={555} y={198} width={170} height={30} rx={5} fill="#1e293b" stroke="#f59e0b" strokeWidth={1} />
-          <text x={640} y={217} textAnchor="middle" fill="#f59e0b" fontSize={9} fontWeight="500" fontFamily="Inter">2. Construct Object Queries</text>
+          <text x={640} y={217} textAnchor="middle" fill="#f59e0b" fontSize={9} fontWeight="500" fontFamily="Inter">2. Share with Both Decoders</text>
 
           <rect x={555} y={234} width={170} height={30} rx={5} fill="#1e293b" stroke="#f59e0b" strokeWidth={1} />
-          <text x={640} y={253} textAnchor="middle" fill="#f59e0b" fontSize={9} fontWeight="500" fontFamily="Inter">3. Extract Aligned Features</text>
+          <text x={640} y={253} textAnchor="middle" fill="#f59e0b" fontSize={9} fontWeight="500" fontFamily="Inter">3. Mimic CDP Predictions</text>
 
           {/* Arrows from teacher and student to CDP */}
           <Arrow x1={516} y1={72} x2={538} y2={170} color="blue" />
@@ -80,13 +80,13 @@ export default function KDDETRFrameworkSlide() {
           <line x1={775} y1={133} x2={915} y2={133} stroke="#334155" strokeWidth={1} />
 
           <rect x={775} y={142} width={140} height={28} rx={5} fill="rgba(245,158,11,0.12)" stroke="#f59e0b" strokeWidth={1} />
-          <text x={845} y={160} textAnchor="middle" fill="#f59e0b" fontSize={9} fontWeight="500" fontFamily="Inter">Feature KD Loss</text>
+          <text x={845} y={160} textAnchor="middle" fill="#f59e0b" fontSize={9} fontWeight="500" fontFamily="Inter">Classification KL</text>
 
           <rect x={775} y={178} width={140} height={28} rx={5} fill="rgba(168,85,247,0.12)" stroke="#a855f7" strokeWidth={1} />
-          <text x={845} y={196} textAnchor="middle" fill="#a855f7" fontSize={9} fontWeight="500" fontFamily="Inter">Logits KD Loss</text>
+          <text x={845} y={196} textAnchor="middle" fill="#a855f7" fontSize={9} fontWeight="500" fontFamily="Inter">Box L1</text>
 
           <rect x={775} y={214} width={140} height={28} rx={5} fill="rgba(6,182,212,0.12)" stroke="#06b6d4" strokeWidth={1} />
-          <text x={845} y={232} textAnchor="middle" fill="#06b6d4" fontSize={9} fontWeight="500" fontFamily="Inter">Attention KD Loss</text>
+          <text x={845} y={232} textAnchor="middle" fill="#06b6d4" fontSize={9} fontWeight="500" fontFamily="Inter">Box GIoU</text>
 
           <rect x={775} y={250} width={140} height={24} rx={5} fill="rgba(239,68,68,0.12)" stroke="#ef4444" strokeWidth={1} />
           <text x={845} y={266} textAnchor="middle" fill="#ef4444" fontSize={9} fontWeight="500" fontFamily="Inter">Detection Loss</text>
@@ -97,7 +97,7 @@ export default function KDDETRFrameworkSlide() {
           {/* Bottom: key difference from DETRDistill */}
           <rect x={170} y={360} width={600} height={34} rx={8} fill="rgba(245,158,11,0.08)" stroke="#f59e0b" strokeWidth={1} strokeDasharray="5 3" />
           <text x={470} y={381} textAnchor="middle" fill="#f59e0b" fontSize={11} fontWeight="500" fontFamily="Inter">
-            Key difference: CDP creates shared reference points that extract consistent features from BOTH models
+            Key difference: shared CDP queries make teacher/student class and box predictions comparable
           </text>
         </svg>
       </div>

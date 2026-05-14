@@ -16,7 +16,7 @@ const personPoints = [
 ];
 
 const queryBlocks = [
-  { x: 414, y: 86, label: 'Reference Point (x, y)', color: '#f59e0b' },
+  { x: 414, y: 86, label: 'CDP Query Prior', color: '#f59e0b' },
   { x: 414, y: 130, label: 'Positional Encoding', color: '#a855f7' },
   { x: 414, y: 174, label: 'Content Query', color: '#06b6d4' },
 ];
@@ -40,15 +40,15 @@ export default function ConsistentDistillationPointsSlide() {
             Step 1
           </text>
           <text x={144} y={47} fill="#cbd5e1" fontSize={11.5} fontWeight="600" fontFamily="Inter, sans-serif">
-            Sample reference points
+            Sample CDP queries
           </text>
           <text x={144} y={61} fill="#cbd5e1" fontSize={11.5} fontWeight="600" fontFamily="Inter, sans-serif">
-            from teacher objects
+            general + teacher-specific
           </text>
 
           <rect x={40} y={74} width={292} height={108} rx={14} fill="#1e293b" stroke="#334155" strokeWidth={1.2} />
           <text x={186} y={95} textAnchor="middle" fill="#94a3b8" fontSize={10} fontWeight="500" fontFamily="Inter, sans-serif">
-            Teacher feature map
+            Teacher-guided query priors
           </text>
 
           <rect x={64} y={106} width={118} height={50} rx={10} fill="rgba(59,130,246,0.06)" stroke="#3b82f6" strokeWidth={1.8} strokeDasharray="6 5" />
@@ -69,7 +69,7 @@ export default function ConsistentDistillationPointsSlide() {
 
           <rect x={62} y={192} width={248} height={22} rx={11} fill="rgba(245,158,11,0.10)" />
           <text x={186} y={207} textAnchor="middle" fill="#fbbf24" fontSize={10.5} fontWeight="600" fontFamily="Inter, sans-serif">
-            Sample K points near detected objects
+            Sample shared distillation queries
           </text>
 
           {/* Step 2 */}
@@ -130,23 +130,23 @@ export default function ConsistentDistillationPointsSlide() {
             Step 3
           </text>
           <text x={142} y={280} fill="#cbd5e1" fontSize={12} fontWeight="600" fontFamily="Inter, sans-serif">
-            Extract and compare features from both models using those same queries
+            Feed those same queries to both decoders and compare predictions
           </text>
 
           <rect x={54} y={304} width={360} height={96} rx={16} fill="rgba(59,130,246,0.06)" stroke="#3b82f6" strokeWidth={2.2} />
           <text x={234} y={336} textAnchor="middle" fill="#60a5fa" fontSize={15} fontWeight="700" fontFamily="Inter, sans-serif">
-            Teacher Encoder Features
+            Teacher CDP Predictions
           </text>
           <text x={234} y={367} textAnchor="middle" fill="#93c5fd" fontSize={12} fontWeight="500" fontFamily="Inter, sans-serif">
-            Cross-attention with consistent queries
+            class distribution + box
           </text>
 
           <rect x={566} y={304} width={360} height={96} rx={16} fill="rgba(16,185,129,0.06)" stroke="#10b981" strokeWidth={2.2} />
           <text x={746} y={336} textAnchor="middle" fill="#34d399" fontSize={15} fontWeight="700" fontFamily="Inter, sans-serif">
-            Student Encoder Features
+            Student CDP Predictions
           </text>
           <text x={746} y={367} textAnchor="middle" fill="#6ee7b7" fontSize={12} fontWeight="500" fontFamily="Inter, sans-serif">
-            Cross-attention with the same query anchors
+            class distribution + box
           </text>
 
           <rect x={405} y={392} width={170} height={40} rx={12} fill="rgba(245,158,11,0.16)" stroke="#f59e0b" strokeWidth={2.4} />
@@ -175,17 +175,17 @@ export default function ConsistentDistillationPointsSlide() {
 
           <rect x={112} y={440} width={126} height={28} rx={8} fill="rgba(59,130,246,0.12)" stroke="#3b82f6" strokeWidth={1.8} />
           <text x={175} y={458} textAnchor="middle" fill="#60a5fa" fontSize={10.5} fontWeight="600" fontFamily="Inter, sans-serif">
-            Teacher features
+            Teacher cls + box
           </text>
 
           <rect x={427} y={438} width={126} height={32} rx={8} fill="rgba(239,68,68,0.14)" stroke="#ef4444" strokeWidth={2} />
           <text x={490} y={459} textAnchor="middle" fill="#f87171" fontSize={11} fontWeight="700" fontFamily="Inter, sans-serif">
-            KD Loss
+            KL + L1 + GIoU
           </text>
 
           <rect x={742} y={440} width={126} height={28} rx={8} fill="rgba(16,185,129,0.12)" stroke="#10b981" strokeWidth={1.8} />
           <text x={805} y={458} textAnchor="middle" fill="#34d399" fontSize={10.5} fontWeight="600" fontFamily="Inter, sans-serif">
-            Student features
+            Student cls + box
           </text>
 
           <line x1={239} y1={454} x2={425} y2={454} stroke="#ef4444" strokeWidth={2.5} strokeDasharray="8 6" />
@@ -193,7 +193,7 @@ export default function ConsistentDistillationPointsSlide() {
 
           <rect x={584} y={258} width={348} height={30} rx={15} fill="rgba(16,185,129,0.09)" />
           <text x={758} y={277} textAnchor="middle" fill="#34d399" fontSize={10} fontWeight="600" fontFamily="Inter, sans-serif">
-            Aligned features are now comparable at the same semantic locations
+            CDP predictions align because decoder query inputs are shared
           </text>
         </svg>
       </div>

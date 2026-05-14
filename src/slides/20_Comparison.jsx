@@ -9,13 +9,13 @@ export default function ComparisonSlide() {
           headers={['Aspect', 'Chen et al. 2017', 'DETRDistill (2023)', 'KD-DETR (2024)']}
           rows={[
             ['Target Architecture', 'CNN detectors (Faster R-CNN)', 'DETR family (universal)', 'DETR family (universal)'],
-            ['Distillation Points', 'Anchors / RoI features', 'Output-level (Hungarian)', 'Consistent reference points'],
-            ['Feature Alignment', 'Spatial correspondence', 'Attention-weighted features', 'Shared query cross-attention'],
-            ['Logits Distillation', 'Soft labels (class + reg)', 'Hungarian-matched logits', 'CDP-aligned logits'],
-            ['Intermediate KD', 'Feature imitation (hint)', 'Query representation KD', 'Feature + attention KD'],
-            ['Key Innovation', 'Adapt KD to detection', 'Solve T/S prediction mismatch', 'Deep consistent alignment'],
+            ['Distillation Points', 'Anchors / RoI regions', 'Hungarian-matched predictions', 'Shared CDP decoder queries'],
+            ['Feature Alignment', 'Hint feature imitation', 'Target-aware feature KD', 'Consistent prediction alignment'],
+            ['Logits / Box KD', 'Class + box imitation', 'Hungarian-matched logits', 'CDP-aligned KL + L1 + GIoU'],
+            ['Query Handling', 'Not applicable', 'Query-prior assignment', 'Shared specialized object queries'],
+            ['Key Innovation', 'Adapt KD to detection', 'Solve T/S prediction mismatch', 'Consistent prediction distillation'],
             ['Limitation', 'Requires spatial anchors', 'Output-only alignment', 'More complex pipeline'],
-            ['Best COCO Gain', '+3.1 mAP (VOC)', '+2.3 AP', '+3.0 AP'],
+            ['Best COCO Gain', '+2.9 mAP', '+2.5 AP', '+3.8 AP'],
           ]}
           caption="Side-by-side comparison of the three KD approaches for object detection"
         />
@@ -49,7 +49,7 @@ export default function ComparisonSlide() {
             {/* Arrow */}
             <line x1={475} y1={40} x2={700} y2={40} stroke="#334155" strokeWidth={2} />
             <text x={590} y={28} textAnchor="middle" fill="#475569" fontSize={9} fontFamily="Inter" fontStyle="italic">
-              Need deeper alignment beyond outputs
+              Need consistent query-level predictions
             </text>
 
             {/* KD-DETR 2024 */}
@@ -57,7 +57,7 @@ export default function ComparisonSlide() {
             <text x={750} y={44} textAnchor="middle" fill="#f59e0b" fontSize={10} fontWeight="700" fontFamily="Inter">3</text>
             <text x={750} y={75} textAnchor="middle" fill="#f59e0b" fontSize={11} fontWeight="600" fontFamily="Inter">KD-DETR</text>
             <text x={750} y={90} textAnchor="middle" fill="#64748b" fontSize={9} fontFamily="Inter">CVPR 2024</text>
-            <text x={750} y={105} textAnchor="middle" fill="#94a3b8" fontSize={8} fontFamily="Inter">Consistent deep alignment</text>
+            <text x={750} y={105} textAnchor="middle" fill="#94a3b8" fontSize={8} fontFamily="Inter">Shared CDP predictions</text>
           </svg>
         </div>
       </div>

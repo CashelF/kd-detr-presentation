@@ -55,17 +55,17 @@ export default function DETRDistillOverviewSlide() {
           <text x={790} y={148} textAnchor="middle" fill="#a855f7" fontSize={11} fontWeight="700" fontFamily="Inter">Feature Distillation</text>
           <text x={790} y={164} textAnchor="middle" fill="#94a3b8" fontSize={9} fontFamily="Inter">Attention-guided encoder features</text>
 
-          {/* 3. Query Distillation */}
+          {/* 3. Query-prior Assignment Distillation */}
           <line x1={286} y1={93} x2={286} y2={203} stroke="#06b6d4" strokeWidth={2.5} strokeDasharray="6 3" />
           <rect x={672} y={193} width={236} height={68} rx={10} fill="rgba(6,182,212,0.1)" stroke="#06b6d4" strokeWidth={2} />
-          <text x={790} y={215} textAnchor="middle" fill="#06b6d4" fontSize={11} fontWeight="700" fontFamily="Inter">3. Query</text>
-          <text x={790} y={231} textAnchor="middle" fill="#06b6d4" fontSize={11} fontWeight="700" fontFamily="Inter">Distillation</text>
-          <text x={790} y={247} textAnchor="middle" fill="#94a3b8" fontSize={9} fontFamily="Inter">Align matched decoder queries</text>
+          <text x={790} y={215} textAnchor="middle" fill="#06b6d4" fontSize={11} fontWeight="700" fontFamily="Inter">3. Query-prior</text>
+          <text x={790} y={231} textAnchor="middle" fill="#06b6d4" fontSize={11} fontWeight="700" fontFamily="Inter">Assignment Distillation</text>
+          <text x={790} y={247} textAnchor="middle" fill="#94a3b8" fontSize={9} fontFamily="Inter">Use stable teacher query assignments</text>
 
           {/* Bottom: Universality note */}
           <rect x={10} y={290} width={898} height={50} rx={10} fill="rgba(16,185,129,0.06)" stroke="#10b981" strokeWidth={1} strokeDasharray="5 3" />
           <text x={460} y={310} textAnchor="middle" fill="#10b981" fontSize={12} fontWeight="600" fontFamily="Inter">
-            Universal: works across DETR, Deformable DETR, Conditional DETR, DAB-DETR, DN-DETR, DINO
+            Validated on representative DETR families: AdaMixer, Deformable DETR, Conditional DETR
           </text>
           <text x={460} y={328} textAnchor="middle" fill="#64748b" fontSize={10} fontFamily="Inter">
             Chang et al., &quot;DETRDistill: A Universal Knowledge Distillation Framework for DETR-families&quot; (ICCV 2023)
@@ -74,7 +74,7 @@ export default function DETRDistillOverviewSlide() {
           {/* Total loss */}
           <rect x={340} y={354} width={240} height={36} rx={8} fill="#1e293b" stroke="#334155" strokeWidth={1.5} />
           <text x={460} y={377} textAnchor="middle" fill="#f8fafc" fontSize={12} fontWeight="500" fontFamily="JetBrains Mono, monospace">
-            L = L_det + <tspan fill="#f59e0b">L_hmd</tspan> + <tspan fill="#a855f7">L_tfd</tspan> + <tspan fill="#06b6d4">L_qd</tspan>
+            L = L_det + <tspan fill="#f59e0b">L_LD</tspan> + <tspan fill="#a855f7">L_FD</tspan> + <tspan fill="#06b6d4">L_AD</tspan>
           </text>
         </svg>
       </div>

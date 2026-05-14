@@ -1,79 +1,121 @@
 import SlideLayout from '../components/SlideLayout';
 import Table from '../components/Table';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const chartData = [
-  { name: 'DETR-R50', baseline: 42.0, distilled: 43.7, teacher: 44.9 },
-  { name: 'Def.DETR-R50', baseline: 43.8, distilled: 45.8, teacher: 46.9 },
-  { name: 'Cond.DETR-R50', baseline: 40.9, distilled: 43.2, teacher: 45.0 },
-  { name: 'DAB-DETR-R50', baseline: 42.5, distilled: 44.5, teacher: 45.7 },
-  { name: 'DN-DETR-R50', baseline: 43.4, distilled: 45.3, teacher: 46.3 },
+  { name: 'AdaMixer', baseline: 42.3, distilled: 44.7, teacher: 43.6 },
+  { name: 'Def.DETR', baseline: 44.1, distilled: 46.6, teacher: 45.5 },
+  { name: 'Cond.DETR', baseline: 40.7, distilled: 42.9, teacher: 42.4 },
 ];
 
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload) {
-    return (
-      <div className="bg-slide-surface border border-slide-border rounded-lg px-3 py-2 text-xs shadow-lg">
-        <div className="font-semibold text-slide-text mb-1">{label}</div>
-        {payload.map((p, i) => (
-          <div key={i} style={{ color: p.color }}>{p.name}: {p.value} AP</div>
-        ))}
-      </div>
-    );
-  }
-  return null;
-};
-
 export default function DETRDistillResultsSlide() {
+  const minAP = 40;
+  const maxAP = 47;
+  const chartTop = 22;
+  const chartLeft = 44;
+  const chartWidth = 278;
+  const chartHeight = 305;
+  const groupWidth = chartWidth / chartData.length;
+  const barWidth = 18;
+  const barGap = 5;
+  const series = [
+    { key: 'baseline', label: 'Baseline', color: '#6c635b' },
+    { key: 'distilled', label: 'DETRDistill', color: '#8ea07d' },
+    { key: 'teacher', label: 'Teacher', color: '#e7e0d6', opacity: 0.7 },
+  ];
+  const gridTicks = [40, 42, 44, 46, 47];
+  const yFor = (value) => chartTop + ((maxAP - value) / (maxAP - minAP)) * chartHeight;
+
   return (
     <SlideLayout title="DETRDistill: Results on COCO val2017" subtitle="DETRDistill (ICCV 2023)" section="detrdistill">
       <div className="flex gap-5 h-full mt-1">
         {/* Table */}
         <div className="flex-1 flex flex-col gap-3">
           <Table
-            headers={['Student', 'Teacher', 'Baseline AP', 'DETRDistill AP', 'Gain']}
+            headers={['Detector', 'Epochs', 'Teacher AP', 'Student AP', 'DETRDistill AP', 'Gain']}
             rows={[
-              ['DETR-R50', 'DETR-R101', '42.0', '43.7', '+1.7'],
-              ['Def. DETR-R50', 'Def. DETR-R101', '43.8', '45.8', '+2.0'],
-              ['Cond. DETR-R50', 'Cond. DETR-R101', '40.9', '43.2', '+2.3'],
-              ['DAB-DETR-R50', 'DAB-DETR-R101', '42.5', '44.5', '+2.0'],
-              ['DN-DETR-R50', 'DN-DETR-R101', '43.4', '45.3', '+1.9'],
+              ['AdaMixer (100 queries)', '12', '43.6', '42.3', '44.7', '+2.4'],
+              ['Deformable DETR (300 queries)', '50', '45.5', '44.1', '46.6', '+2.5'],
+              ['Conditional DETR (300 queries)', '50', '42.4', '40.7', '42.9', '+2.2'],
             ]}
-            caption="COCO val2017 AP (%). All students use ResNet-50, teachers use ResNet-101."
+            caption="Official Table 3, COCO val2017 AP (%). Teachers use ResNet-101; students use ResNet-50."
             compact
           />
 
           {/* Ablation */}
-          <div className="text-xs text-slide-muted mt-1">Ablation (Deformable DETR-R50):</div>
+          <div className="text-xs text-slide-muted mt-1">Ablation (AdaMixer-R50, Table 7):</div>
           <Table
-            headers={['HMD', 'TFD', 'QD', 'AP', 'Gain']}
+            headers={['Distillation', 'AP', 'AP_S', 'AP_M', 'AP_L']}
             rows={[
-              ['', '', '', '43.8', '--'],
-              ['Yes', '', '', '44.7', '+0.9'],
-              ['Yes', 'Yes', '', '45.3', '+1.5'],
-              ['Yes', 'Yes', 'Yes', '45.8', '+2.0'],
+              ['None', '42.3', '25.3', '44.8', '58.2'],
+              ['LD', '43.7 (+1.4)', '25.3', '46.5', '60.7'],
+              ['FD', '43.5 (+1.2)', '25.4', '46.7', '60.0'],
+              ['AD', '42.9 (+0.6)', '24.5', '45.9', '59.3'],
+              ['LD + FD', '44.3 (+2.0)', '25.8', '47.0', '61.0'],
+              ['LD + FD + AD', '44.7 (+2.4)', '26.7', '47.6', '61.0'],
             ]}
-            highlightRow={3}
+            highlightRow={5}
             compact
           />
         </div>
 
         {/* Chart */}
         <div className="w-[360px] flex flex-col">
-          <div className="text-xs text-slide-muted mb-1">AP improvement across DETR variants</div>
+          <div className="text-xs text-slide-muted mb-1">Official main results across three DETR variants</div>
           <div className="flex-1 min-h-0">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData} margin={{ top: 10, right: 5, left: -10, bottom: 40 }} barGap={2} barSize={18}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#4a4138" />
-                <XAxis dataKey="name" tick={{ fill: '#b5aba0', fontSize: 8 }} angle={-20} textAnchor="end" interval={0} height={50} />
-                <YAxis domain={[38, 48]} tick={{ fill: '#b5aba0', fontSize: 10 }}
-                  label={{ value: 'AP (%)', angle: -90, position: 'insideLeft', fill: '#b5aba0', fontSize: 10, offset: 15 }} />
-                <Tooltip content={<CustomTooltip />} cursor={false} />
-                <Bar dataKey="baseline" name="Baseline" fill="#6c635b" radius={[3, 3, 0, 0]} opacity={0.7} />
-                <Bar dataKey="distilled" name="DETRDistill" fill="#8ea07d" radius={[3, 3, 0, 0]} />
-                <Bar dataKey="teacher" name="Teacher" fill="#e7e0d6" radius={[3, 3, 0, 0]} opacity={0.65} />
-              </BarChart>
-            </ResponsiveContainer>
+            <svg viewBox="0 0 360 385" className="w-full h-full overflow-visible">
+              {gridTicks.map((tick) => {
+                const y = yFor(tick);
+                return (
+                  <g key={tick}>
+                    <line x1={chartLeft} y1={y} x2={chartLeft + chartWidth} y2={y} stroke="#4a4138" strokeDasharray="3 3" />
+                    <text x={chartLeft - 10} y={y + 4} textAnchor="end" fill="#b5aba0" fontSize={10} fontFamily="Inter">
+                      {tick}
+                    </text>
+                  </g>
+                );
+              })}
+
+              <line x1={chartLeft} y1={chartTop} x2={chartLeft} y2={chartTop + chartHeight} stroke="#6c635b" />
+              <line x1={chartLeft} y1={chartTop + chartHeight} x2={chartLeft + chartWidth} y2={chartTop + chartHeight} stroke="#6c635b" />
+              <text
+                x={14}
+                y={chartTop + chartHeight / 2}
+                textAnchor="middle"
+                fill="#b5aba0"
+                fontSize={10}
+                fontFamily="Inter"
+                transform={`rotate(-90 14 ${chartTop + chartHeight / 2})`}
+              >
+                AP (%)
+              </text>
+
+              {chartData.map((item, groupIndex) => {
+                const groupStart = chartLeft + groupIndex * groupWidth + 10;
+                const totalBarsWidth = series.length * barWidth + (series.length - 1) * barGap;
+                const firstBarX = groupStart + (groupWidth - totalBarsWidth) / 2;
+                return (
+                  <g key={item.name}>
+                    {series.map((s, seriesIndex) => {
+                      const value = item[s.key];
+                      const x = firstBarX + seriesIndex * (barWidth + barGap);
+                      const y = yFor(value);
+                      const height = chartTop + chartHeight - y;
+                      return (
+                        <g key={s.key}>
+                          <rect x={x} y={y} width={barWidth} height={height} rx={3} fill={s.color} opacity={s.opacity ?? 0.95} />
+                          <text x={x + barWidth / 2} y={y - 5} textAnchor="middle" fill="#f6f0e8" fontSize={9} fontWeight="600" fontFamily="Inter">
+                            {value.toFixed(1)}
+                          </text>
+                        </g>
+                      );
+                    })}
+                    <text x={groupStart + groupWidth / 2} y={chartTop + chartHeight + 26} textAnchor="middle" fill="#b5aba0" fontSize={9} fontFamily="Inter">
+                      {item.name}
+                    </text>
+                  </g>
+                );
+              })}
+            </svg>
           </div>
           {/* Legend */}
           <div className="flex justify-center gap-4 text-xs mt-1 text-slide-muted">

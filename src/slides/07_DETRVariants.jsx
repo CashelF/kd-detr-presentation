@@ -8,7 +8,7 @@ export default function DETRVariantsSlide() {
     ['Deformable DETR', '2021', 'Deformable attention (sparse)', '50', '43.8', '40M'],
     ['Conditional DETR', '2021', 'Conditional cross-attention', '50', '40.9', '44M'],
     ['DAB-DETR', '2022', 'Dynamic anchor boxes as queries', '50', '42.5', '44M'],
-    ['DN-DETR', '2022', 'Denoising training strategy', '50', '43.4', '44M'],
+    ['DN-DETR', '2022', 'Denoising training strategy', '12', '43.4', '44M'],
     ['DINO', '2022', 'Contrastive denoising + mixed queries', '12', '49.0', '47M'],
     ['RT-DETR', '2023', 'Real-time DETR with hybrid encoder', '72', '53.1', '32M'],
   ];
@@ -17,7 +17,7 @@ export default function DETRVariantsSlide() {
     <SlideLayout title="The DETR Family: Evolution of Detection Transformers" subtitle="DETR Introduction" section="detr">
       <div className="flex flex-col h-full mt-2 gap-4">
         <Table headers={headers} rows={rows} highlightRow={0}
-          caption="COCO val2017 results with ResNet-50 backbone (unless noted). AP = Average Precision." />
+          caption="Mixed reported checkpoints, not a controlled benchmark. COCO val2017 AP with ResNet-50 backbone unless noted." />
 
         {/* Timeline visualization */}
         <div className="flex-1 flex items-center">
